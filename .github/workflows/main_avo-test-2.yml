@@ -22,6 +22,13 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Login to Azure CLI using service principal
+        uses: azure/login@v1
+        with: 
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 
+
       - name: Create and start virtual environment
         run: |
           python -m venv venv
