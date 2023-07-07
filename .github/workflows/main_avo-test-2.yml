@@ -21,19 +21,12 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: '3.11'
-
-      - name: Login to Azure CLI using service principal
-        uses: azure/login@v1
-        with: 
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: 
-
+      
       - name: Create and start virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
-      
+
       - name: Install dependencies
         run: pip install -r requirements.txt
         
@@ -60,7 +53,12 @@ jobs:
         with:
           name: python-app
           path: .
-          
+      
+      - name: Login to Azure CLI using service principal
+        uses: azure/login@v1
+        with: 
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
