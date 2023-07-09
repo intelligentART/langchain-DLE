@@ -5,3 +5,4 @@ Flask
 gunicorn
 urllib3<2
 slack_sdk
+slack_bolt
