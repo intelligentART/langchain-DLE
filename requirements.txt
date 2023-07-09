@@ -3,6 +3,6 @@ langchain
 openai
 Flask
 gunicorn
-urllib3<2
+urllib3
 slack_sdk
 slack_bolt
