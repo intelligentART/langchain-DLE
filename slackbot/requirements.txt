@@ -1,0 +1,10 @@
+python-dotenv
+langchain
+openai
+slack-sdk 
+slack-bolt 
+fast-api
+httpx
+uvicorn
+slack_sdk
+slack_bolt
