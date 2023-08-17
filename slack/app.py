@@ -105,7 +105,7 @@ def handle_messages(event, client):
         say (callable): A function for sending a response to the channel.
     """
     
-    if SLACK_BOT_USER_ID not in event["text"]:
+    if "bot_id" in event:
         return
     
     text = event["text"]
