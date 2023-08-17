@@ -95,7 +95,7 @@ def my_function(text):
 
 
 @app.event("app_mention")
-def handle_mentions(body, say):
+def handle_mentions(event, client):
     """
     Event listener for mentions in Slack.
     When the bot is mentioned, this function processes the text and sends a response.
@@ -104,17 +104,20 @@ def handle_mentions(body, say):
         body (dict): The event data received from Slack.
         say (callable): A function for sending a response to the channel.
     """
-    text = body["event"]["text"]
-
-    mention = f"<@{SLACK_BOT_USER_ID}>"
-    text = text.replace(mention, "").strip()
     
+    if SLACK_BOT_USER_ID in event:
+        return
+    
+    text = event["text"]
+    channel = event["channel"]
+
+
     # Get the timestamp of the original message to use as the thread_ts for the reply
-    thread_ts = body["event"]["ts"]
+    thread_ts = event["ts"]
 
     # response = my_function(text)
     response = test_example(text)
-    say(text=response, thread_ts=thread_ts)
+    client.chat_postMessage(channel=channel, text=response, thread_ts=thread_ts)
 
 
 @flask_app.route("/slack/events", methods=["POST"])
