@@ -108,10 +108,13 @@ def handle_mentions(body, say):
 
     mention = f"<@{SLACK_BOT_USER_ID}>"
     text = text.replace(mention, "").strip()
+    
+    # Get the timestamp of the original message to use as the thread_ts for the reply
+    thread_ts = body["event"]["ts"]
 
     # response = my_function(text)
     response = test_example(text)
-    say(response)
+    say(text=response, thread_ts=thread_ts)
 
 
 @flask_app.route("/slack/events", methods=["POST"])
