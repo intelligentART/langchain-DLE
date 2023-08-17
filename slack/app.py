@@ -94,8 +94,8 @@ def my_function(text):
     return response
 
 
-@app.event("app_mention")
-def handle_mentions(event, client):
+@app.event("message")
+def handle_messages(event, client):
     """
     Event listener for mentions in Slack.
     When the bot is mentioned, this function processes the text and sends a response.
@@ -105,7 +105,7 @@ def handle_mentions(event, client):
         say (callable): A function for sending a response to the channel.
     """
     
-    if SLACK_BOT_USER_ID in event:
+    if SLACK_BOT_USER_ID not in event["text"]:
         return
     
     text = event["text"]
