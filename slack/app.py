@@ -104,9 +104,7 @@ def handle_messages(event, client):
         body (dict): The event data received from Slack.
         say (callable): A function for sending a response to the channel.
     """
-    
-    if "bot_id" in event:
-        return
+
     
     text = event["text"]
     channel = event["channel"]
