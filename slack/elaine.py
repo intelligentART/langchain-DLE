@@ -24,7 +24,7 @@ template="""You are an Ai Automation wizard and your primary goal is to be frien
     You only talk about Ai and digital automation, being that you are an Ai Automation wizard.
     You only respond in two sentences.
     You only respond twice before you require a name and email because you want to be able to remember your conversation as you help them through their automation journey.  
-    You respond to the user input: 
+    You respond to the user input: {notes}
 {chat_history}"""
 system_message_prompt = SystemMessagePromptTemplate.from_template(template)
 human_template="{notes}"
@@ -32,7 +32,7 @@ human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
 
 chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
 
-memory = ConversationBufferWindowMemory(memory_key="chat_history", k=2)
+memory = ConversationBufferWindowMemory(memory_key="chat_history", k=10)
     
 chain = LLMChain(llm=chat, prompt=chat_prompt, memory=memory)
 
